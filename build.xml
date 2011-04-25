@@ -1,0 +1,29 @@
+<project name="client" default="convertToJSON" basedir="../">
+    <description>
+    </description>
+
+    <property name="app.name" value="Convert Properties to JSON"/>
+    <property name="binDir" value="bin/production/Json-converter"/>
+    <property name="srcDir" value="trunk/cz/zcu/kiv/jsonconverter"/>
+
+
+    <property name="srcFilename" value="./messages_15-3-2011.properties"/>
+    <property name="destFilename" value="messages-en.json"/>
+    <property name="saveAsJSON" value="true"/>
+
+    <!--####### target: compile #######-->
+    <target name="compile">
+        <echo>Compiling sources of converter...</echo>
+        <javac srcdir="${srcDir}" destdir="${binDir}" includeantruntime="true"/>
+        <echo>Done!</echo>
+    </target>
+
+    <taskdef name="convert" classname="cz.zcu.kiv.jsonconverter.Converter" classpath="${binDir}"/>
+
+    <!--####### target: convertToJSON #######-->
+    <target name="convertToJSON" depends="compile">
+        <echo>Converting...</echo>
+        <convert srcfilename="${srcFilename}" destfilename="${destFilename}" saveasjson="${saveAsJSON}"/>
+        <echo>Done!</echo>
+    </target>
+</project>
