@@ -1,0 +1,1 @@
+Page must be viewed on web server (e.g. Apache) - viewing as an ordinary file will not work!
