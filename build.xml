@@ -3,7 +3,7 @@
     </description>
 
     <property name="app.name" value="Convert Properties to JSON"/>
-    <property name="binDir" value="bin/production/Json-converter"/>
+    <property name="binDir" value="bin/production/Trunk"/>
     <property name="srcDir" value="src/cz/zcu/kiv/jsonconverter"/>
 
 
@@ -18,10 +18,9 @@
         <echo>Done!</echo>
     </target>
 
-    <taskdef name="convert" classname="cz.zcu.kiv.jsonconverter.Converter" classpath="${binDir}"/>
-
     <!--####### target: convertToJSON #######-->
     <target name="convertToJSON" depends="compile">
+        <taskdef name="convert" classname="cz.zcu.kiv.jsonconverter.Converter" classpath="${binDir}"/>
         <echo>Converting...</echo>
         <convert srcfilename="${srcFilename}" destfilename="${destFilename}" saveasjson="${saveAsJSON}"/>
         <echo>Done!</echo>
