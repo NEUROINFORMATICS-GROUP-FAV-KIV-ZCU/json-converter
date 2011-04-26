@@ -1,28 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="main" default="convertToJSON" basedir=".">
     <description>
+        Serves for conversion properties file to JSON format.
     </description>
 
     <property name="app.name" value="Convert Properties to JSON"/>
-    <property name="binDir" value="bin/production/Trunk"/>
-    <property name="srcDir" value="src/cz/zcu/kiv/jsonconverter"/>
-
-
-    <property name="srcFilename" value="./messages.properties"/>
-    <property name="destFilename" value="messages-en.json"/>
-    <property name="saveAsJSON" value="true"/>
+    <property file="build.properties"/>
 
     <!--####### target: compile #######-->
     <target name="compile">
         <echo>Compiling sources of converter...</echo>
+        <mkdir dir="${binDir}"/>
         <javac srcdir="${srcDir}" destdir="${binDir}" includeantruntime="true"/>
-        <echo>Done!</echo>
+        <echo>Sources compiled to '${binDir}'!</echo>
     </target>
 
     <!--####### target: convertToJSON #######-->
     <target name="convertToJSON" depends="compile">
+        <available file="${srcFilename}" property="fileExists"/>
+        <fail message="File '${srcFilename}' does not exist!" unless="fileExists"/>
         <taskdef name="convert" classname="cz.zcu.kiv.jsonconverter.Converter" classpath="${binDir}"/>
         <echo>Converting...</echo>
         <convert srcfilename="${srcFilename}" destfilename="${destFilename}" saveasjson="${saveAsJSON}"/>
-        <echo>Done!</echo>
+        <echo>File '${srcFilename}' has been converted to '${destFilename}'!</echo>
     </target>
+
 </project>
