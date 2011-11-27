@@ -1,0 +1,6 @@
+To install this plugin to a local SVN-based repository:
+ - Increase version of the plugin in pom.xml (important!)
+ - Create a new jar by running mvn package
+ - Go to the EEGDatabase project directory (where the "repo" directory is located)
+ - Assuming you want to install for ex. C:/jc/target/jsonconverter-1.20.jar, run
+mvn org.apache.maven.plugins:maven-install-plugin:2.3.1:install-file -Dfile=C:/jc/target/jsonconverter-1.20.jar -DgroupId=cz.zcu.kiv -DartifactId=jsonconverter -Dversion=1.20 -Dpackaging=jar -DlocalRepositoryPath=repo/
