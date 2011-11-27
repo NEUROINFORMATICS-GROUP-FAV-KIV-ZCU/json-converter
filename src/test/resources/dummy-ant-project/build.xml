@@ -11,18 +11,18 @@
     <target name="compile">
         <echo>Compiling sources of converter...</echo>
         <mkdir dir="${binDir}"/>
-        <javac srcdir="${srcDir}" destdir="${binDir}" includeantruntime="true"/>
+        <javac srcdir="${srcDir}" destdir="${binDir}" includeantruntime="true" excludes="*Maven*"/>
         <echo>Sources compiled to '${binDir}'!</echo>
     </target>
 
     <!--####### target: convertToJSON #######-->
     <target name="convertToJSON" depends="compile">
-        <available file="${srcFilename}" property="fileExists"/>
-        <fail message="File '${srcFilename}' does not exist!" unless="fileExists"/>
-        <taskdef name="convert" classname="cz.zcu.kiv.jsonconverter.Converter" classpath="${binDir}"/>
+        <available file="../${srcFilename}" property="fileExists"/>
+        <fail message="File '../${srcFilename}' does not exist!" unless="fileExists"/>
+        <taskdef name="convert" classname="cz.zcu.kiv.jsonconverter.JsonConverterAntTask" classpath="${binDir}"/>
         <echo>Converting...</echo>
-        <convert srcfilename="${srcFilename}" destfilename="${destFilename}" saveasjson="${saveAsJSON}"/>
-        <echo>File '${srcFilename}' has been converted to '${destFilename}'!</echo>
+        <convert srcfilename="../${srcFilename}" destfilename="${binDir}${destFilename}" saveasjson="${saveAsJSON}"/>
+        <echo>File '../${srcFilename}' has been converted to '${binDir}${destFilename}'!</echo>
     </target>
 
 </project>
