@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Class allowing the Converter to be executed as Maven plugin mojo
+ * Class allowing the Converter to be executed as Maven plugin mojo.
+ * If not defined otherwise in the project configuration, the plugin
+ * will execute in the process-sources phase, that is before compilation.
  * Created by IntelliJ IDEA.
  * User: jnovotny
  * Date: 24.11.11
@@ -44,6 +46,11 @@ public class JsonConverterMavenMojo extends AbstractMojo {
      */
     boolean saveAsJSON;
 
+    /**
+     * This method is executed by maven and converts Java properties to Json messages
+     * using the Converter class
+     * @throws MojoExecutionException
+     */
     public void execute() throws MojoExecutionException {
         try {
             //createDirIfNeeded(destFile.getParentFile());//When saving to potentially non-existent target dir
@@ -54,11 +61,11 @@ public class JsonConverterMavenMojo extends AbstractMojo {
         }
     }
 
-    private void createDirIfNeeded(File destDir) {
-        if(destDir != null && !destDir.exists()){
-            destDir.mkdirs();
-        }
-    }
+//    private void createDirIfNeeded(File destDir) {
+//        if(destDir != null && !destDir.exists()){
+//            destDir.mkdirs();
+//        }
+//    }
 
     public void setLog(org.apache.maven.plugin.logging.Log logger){
         this.logger = logger;

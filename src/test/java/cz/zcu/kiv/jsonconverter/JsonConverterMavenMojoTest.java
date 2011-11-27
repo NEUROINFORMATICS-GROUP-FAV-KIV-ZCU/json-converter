@@ -3,7 +3,6 @@ package cz.zcu.kiv.jsonconverter;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 
 import java.io.File;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.

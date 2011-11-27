@@ -146,8 +146,9 @@ public class Converter
      * Save data in {@link Properties} format with UTF-8 encoding.
      *
      * @param destFile File to save to.
-     * @return TRUE, if save was succesful.
      * @see {@link #saveAsProperties(File, String)}
+     * @throws java.io.FileNotFoundException when the output file is not found
+     * @throws java.io.UnsupportedEncodingException when output file encoding is not supported
      */
     public void saveAsProperties(File destFile) throws FileNotFoundException, UnsupportedEncodingException {
         saveAsProperties(destFile, "utf-8");
@@ -158,8 +159,9 @@ public class Converter
      *
      * @param destFile File to save to.
      * @param encoding Encoding to save data.
-     * @return TRUE, if save was succesful.
      * @see #saveAsProperties(File)
+     * @throws java.io.FileNotFoundException when the output file is not found
+     * @throws java.io.UnsupportedEncodingException when output file encoding is not supported
      */
     public void saveAsProperties(File destFile, String encoding) throws FileNotFoundException, UnsupportedEncodingException {
             PrintWriter pw = new PrintWriter(destFile, encoding);
@@ -234,8 +236,9 @@ public class Converter
      * Save data in JSON format with UTF-8 encoding.
      *
      * @param destFile File to save to.
-     * @return TRUE, if save was succesful.
      * @see {@link #saveAsJson(File, String)}
+     * @throws java.io.FileNotFoundException when the output file is not found
+     * @throws java.io.UnsupportedEncodingException when output file encoding is not supported
      */
     public void saveAsJson(File destFile) throws FileNotFoundException, UnsupportedEncodingException {
         saveAsJson(destFile, "utf-8");
@@ -246,20 +249,17 @@ public class Converter
      *
      * @param destFile File to save to.
      * @param encoding Encoding to save data.
-     * @return TRUE, if save was succesful.
      * @see {@link #saveAsProperties(File, String)}
+     * @throws java.io.FileNotFoundException when the output file is not found
+     * @throws java.io.UnsupportedEncodingException when output file encoding is not supported
      */
-    public boolean saveAsJson(File destFile, String encoding) throws FileNotFoundException, UnsupportedEncodingException {
+    public void saveAsJson(File destFile, String encoding) throws FileNotFoundException, UnsupportedEncodingException {
             PrintWriter pw = new PrintWriter(destFile, encoding);
             pw.write(getStructureAsJson());
             pw.close();
-            return true;
     }
 
     public static void runConversion(File srcFile, File destFile, boolean saveAsJSON) throws IOException {
-		
-
-
         Properties props = new Properties();
         Converter c;
         FileInputStream fis = new FileInputStream(srcFile);
